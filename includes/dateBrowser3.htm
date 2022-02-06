@@ -1,0 +1,401 @@
+<div id="ctl_calendar" name="ctl_calendar">
+
+<table width="250">
+<tr>
+<td align="center">
+<SCRIPT>
+	<!--
+	//asignación que indica la fecha límite para el combo de los meses (31 de diciembre del 2003)
+	var g_fecha_fin_combos=new Date(2003,11,31)	
+
+	
+function LlenarCombos(){
+	var l_lista_nombres_es=new Array()
+	var l_lista_nombres_en=new Array()
+	var l_fecha_inicio
+	var l_fecha_fin
+	l_lista_nombres_es[0]="Enero"
+	l_lista_nombres_es[1]="Febrero"
+	l_lista_nombres_es[2]="Marzo"
+	l_lista_nombres_es[3]="Abril"
+	l_lista_nombres_es[4]="Mayo"
+	l_lista_nombres_es[5]="Junio"
+	l_lista_nombres_es[6]="Julio"
+	l_lista_nombres_es[7]="Agosto"
+	l_lista_nombres_es[8]="Septiembre"
+	l_lista_nombres_es[9]="Octubre"
+	l_lista_nombres_es[10]="Noviembre"
+	l_lista_nombres_es[11]="Diciembre"
+
+	l_lista_nombres_en[0]="January"
+	l_lista_nombres_en[1]="February"
+	l_lista_nombres_en[2]="March"
+	l_lista_nombres_en[3]="April"
+	l_lista_nombres_en[4]="May"
+	l_lista_nombres_en[5]="June"
+	l_lista_nombres_en[6]="July"
+	l_lista_nombres_en[7]="August"
+	l_lista_nombres_en[8]="September"
+	l_lista_nombres_en[9]="October"
+	l_lista_nombres_en[10]="November"
+	l_lista_nombres_en[11]="December"
+try{	
+	if (g_fecha_inicio_combos+""=="undefined"){
+		l_fecha_inicio_combos=new Date(2001,0,1)
+		}
+	else{
+		l_fecha_inicio_combos=new Date(g_fecha_inicio_combos.getFullYear(),g_fecha_inicio_combos.getMonth(),g_fecha_inicio_combos.getDate())
+		}
+}catch(ex){
+	l_fecha_inicio_combos=new Date(2001,0,1)
+}		
+try{
+	if (g_fecha_fin_combos+""=="undefined"){
+		l_fecha_fin_combos=new Date(2003,11,31)
+		}
+	else{
+		l_fecha_fin_combos=new Date(g_fecha_fin_combos.getFullYear(),g_fecha_fin_combos.getMonth(),g_fecha_fin_combos.getDate())
+		}
+}catch(ex){		
+	l_fecha_fin_combos=new Date(2003,11,31)
+}		
+	l_fecha_inicio_combos.setDate(1)
+	l_fecha_fin_combos.setDate(1)
+
+	var l_combo=form_calendar.mes_ES	
+	var l_fecha=new Date(l_fecha_inicio_combos.getFullYear(),l_fecha_inicio_combos.getMonth(),l_fecha_inicio_combos.getDate())
+	
+	//vacía combo
+	while(l_combo.options.length>0){
+		l_combo.options.remove(0)
+		}
+		
+	//añade opciones al arreglo
+	while(l_fecha.valueOf()<l_fecha_fin_combos.valueOf()){	
+		l_option = document.createElement("OPTION")
+		l_combo.options.add(l_option)
+
+		l_option.innerText = l_fecha.getFullYear() + " " + l_lista_nombres_es[l_fecha.getMonth()]
+
+		l_option.value = toYYYYMMDD(l_fecha)
+
+		l_fecha.setMonth(l_fecha.getMonth()+1)		
+		}
+
+	var l_combo=form_calendar.mes_EN
+	var l_fecha=new Date(l_fecha_inicio_combos.getFullYear(),l_fecha_inicio_combos.getMonth(),l_fecha_inicio_combos.getDate())
+	
+	//vacía combo
+	while(l_combo.options.length>0){
+		l_combo.options.remove(0)
+		}
+		
+	//añade opciones al arreglo
+	while(l_fecha.valueOf()<=l_fecha_fin_combos.valueOf()){	
+		l_option = document.createElement("OPTION")
+		l_combo.options.add(l_option)
+
+		l_option.innerText = l_fecha.getFullYear() + " " + l_lista_nombres_en[l_fecha.getMonth()]
+
+		l_option.value = toYYYYMMDD(l_fecha)
+	
+		l_fecha.setMonth(l_fecha.getMonth()+1)		
+		}
+
+
+		
+	}
+
+	
+	function fromYYYYMMDD(cadena){
+		
+		var l_anio=parseInt(cadena.substr(0,4))
+		var l_mes=parseInt(cadena.substr(4,2))-1
+		var l_dia=parseInt(cadena.substr(6,2))
+		
+		if(cadena.substr(4,2)=="08"){
+			l_mes=7
+			}
+		if(cadena.substr(4,2)=="09"){
+			l_mes=8
+			}
+		var l_retorno=new Date(l_anio,l_mes,l_dia)
+				
+		return l_retorno;
+		}
+	function toYYYYMMDD(fecha){
+		var l_anio=fecha.getFullYear() + ""
+		var l_mes=(fecha.getMonth()+1)+""
+		var l_dia=fecha.getDate() + ""
+		while (l_anio.length<4){
+			l_anio="0"+l_anio
+			}
+		while (l_mes.length<2){
+			l_mes="0"+l_mes
+			}
+		while (l_dia.length<2){
+			l_dia="0"+l_dia
+			}
+		var l_retorno=l_anio+l_mes+l_dia
+		return l_retorno;		
+		}
+
+	function showMonth(form){
+		var l_select=null;
+		var l_index=0;
+		if(form.lang.value=="ES"){
+			l_select=form.mes_ES.value
+			c_1.innerHTML="Lun"
+			c_2.innerHTML="Mar"
+			c_3.innerHTML="Mie"
+			c_4.innerHTML="Jue"
+			c_5.innerHTML="Vie"
+			c_6.innerHTML="Sab"
+			c_7.innerHTML="Dom"
+			}
+		else{
+			l_select=form.mes_EN.value
+			c_1.innerHTML="Mon"
+			c_2.innerHTML="Tue"
+			c_3.innerHTML="Wed"
+			c_4.innerHTML="Thu"
+			c_5.innerHTML="Fri"
+			c_6.innerHTML="Sat"
+			c_7.innerHTML="Sun"			
+			}
+		if(l_select!=""){
+			
+			var l_fecha_inicial=fromYYYYMMDD(l_select)
+			
+			fillMonthFrom(l_fecha_inicial)
+			month1.style["visibility"]="visible";
+			}
+		else{
+			month1.style["visibility"]="hidden";
+			}
+		}
+	function setLanguage(form,lang){
+		form.lang.value=lang;
+		if(lang=="ES"){
+			form_ES.style.visibility="visible";
+			form_EN.style.visibility="hidden";
+			form_ES.style.display="block"
+			form_EN.style.display="none"
+
+			}
+		else{
+			form_ES.style.visibility="hidden";
+			form_EN.style.visibility="visible";		
+			form_ES.style.display="none"
+			form_EN.style.display="block"
+
+			
+			}
+		ajustarMesActual()
+		}
+	function fillMonthFrom(fecha){
+		var l_fila=1
+		var l_fecha=new Date( fecha.getFullYear() , fecha.getMonth() , fecha.getDate() )		
+		var l_mes_actual=fecha.getMonth()
+		var l_columna=fecha.getDay();
+	 	if(l_columna==0){
+			l_columna=7
+			}
+		var l_index=0;
+		var l_celda;
+		
+		for(l_index=1;l_index<l_columna;l_index++){
+			l_celda=eval("c_1_"+l_index)
+			l_celda.innerHTML=""
+			}		
+		while(l_fecha.getMonth()==l_mes_actual){
+			
+			l_celda=eval("c_"+l_fila+"_"+l_columna)
+			l_celda.innerHTML="<a  href='javascript:dateSelectHandler(\""+toYYYYMMDD(l_fecha)+"\")' >"+l_fecha.getDate()+"</a>"
+			l_columna++;
+			if(l_columna>7){
+				l_columna=1;
+				l_fila++;
+				}
+			l_fecha.setDate(l_fecha.getDate()+1)
+			}
+		while(l_fila<=6){
+			l_celda=eval("c_"+l_fila+"_"+l_columna)
+			l_celda.innerHTML=""
+			l_columna++;
+			if(l_columna>7){
+				l_columna=1;
+				l_fila++;
+				}
+			}				
+		}
+//versión especial que espera que la función DateSelectHandler sea definida en la página principal
+/*		
+function dateSelectHandler(cadena_fecha){	
+	if(g_list_documents[cadena_fecha]!="" && g_list_documents[cadena_fecha]+""!="undefined"){
+	
+		if(g_list_another_language[cadena_fecha]=="" || g_list_another_language[cadena_fecha]+""=="undefined"){
+			window.open(g_list_documents[cadena_fecha],"_blank","location=no");
+			}
+		else{
+			if(form_calendar.lang.value=="ES"){
+				if(confirm("Este documento se encuentra disponible solo en inglés.\nDesea todavía revisarlo? ")){
+					window.open(g_list_documents[cadena_fecha],null,"location=no");
+					}
+				}
+			else{
+				if(confirm("This document is only available in spanish.\nDo you want to open it anyway? ")){
+					window.open(g_list_documents[cadena_fecha],null,"location=no");
+					}			
+				}
+			}
+		}
+	else{
+			if(form_calendar.lang=="ES"){
+				alert("No existe documento relacionado con esta fecha.")
+				}
+			else{
+				alert("No document is related to this date.")			
+				}
+			}
+			
+		}
+*/		
+function ajustarMesActual(){	
+	var l_fecha=new Date();
+		l_fecha.setDate(1);
+		form_calendar.mes_ES.value=toYYYYMMDD(l_fecha)
+		form_calendar.mes_EN.value=toYYYYMMDD(l_fecha)
+	}
+		
+	-->
+</SCRIPT>
+<form name="form_calendar">
+<input type="hidden" name="lang" value="ES">
+<input type="hidden" name="target" value="_blank">
+
+<div id="form_ES" style="visibility:visible;display:block;">
+	Escoja un Mes
+	<SELECT name="mes_ES" onChange="showMonth(this.form)">
+		<OPTION value="20030101">2003 Enero</OPTION>
+		<OPTION value="20030201">2003 Febrero</OPTION>
+		<OPTION value="20030301">2003 Marzo</OPTION>
+		<OPTION value="20030401">2003 Abril</OPTION>
+		<OPTION value="20030501">2003 Mayo</OPTION>
+		<OPTION value="20030601">2003 Junio</OPTION>
+		<OPTION value="20030701">2003 Julio</OPTION>
+		<OPTION value="20030801">2003 Agosto</OPTION>
+		<OPTION value="20030901">2003 Septiembre</OPTION>
+		<OPTION value="20031001">2003 Octubre</OPTION>
+		<OPTION value="20031101">2003 Noviembre</OPTION>
+		<OPTION value="20031201">2003 Diciembre</OPTION>
+		</SELECT>
+	<!--<input type="button" value="Ver" onclick="showMonth(this.form)">-->
+		<br>
+		<br>	
+	</div>
+<div id="form_EN" style="visibility:visible;display:block;">
+	Choose a Month
+	<SELECT name="mes_EN" onChange="showMonth(this.form)">
+		<OPTION value="20030101">2003 January</OPTION>
+		<OPTION value="20030201">2003 February</OPTION>
+		<OPTION value="20030301">2003 March</OPTION>
+		<OPTION value="20030401">2003 April</OPTION>
+		<OPTION value="20030501">2003 May</OPTION>
+		<OPTION value="20030601">2003 Jun</OPTION>
+		<OPTION value="20030701">2003 July</OPTION>
+		<OPTION value="20030801">2003 August</OPTION>
+		<OPTION value="20030901">2003 September</OPTION>
+		<OPTION value="20031001">2003 October</OPTION>
+		<OPTION value="20031101">2003 November</OPTION>
+		<OPTION value="20031201">2003 Deciember</OPTION>
+		</SELECT>
+<!--		<input type="button" value="Choose" onclick="showMonth(this.form)"> -->
+		<br>
+		<br>
+	</div>
+</form>
+
+<script>
+LlenarCombos()
+</script>
+
+<div id="month1" style="visibility:hidden;display:block">
+	<table borderColor="#808080" cellSpacing="3" borderColorDark="#808080" cellPadding="3" borderColorLight="#808080" border="2">
+		<tr>
+			<td id="c_1" class="banner_blue">Mon</td>
+			<td id="c_2" class="banner_blue">Tue</td>
+			<td id="c_3" class="banner_blue">Wed</td>
+			<td id="c_4" class="banner_blue">Thu</td>
+			<td id="c_5" class="banner_blue">Fri</td>
+			<td id="c_6" class="banner_blue">Sat</td>
+			<td id="c_7" class="banner_blue">Sun</td>
+		</tr>
+		<tr>
+			<td id="c_1_1" style="text-align:center;" ></td>
+			<td id="c_1_2" style="text-align:center;" ></td>
+			<td id="c_1_3" style="text-align:center;" ></td>
+			<td id="c_1_4" style="text-align:center;" ></td>
+			<td id="c_1_5" style="text-align:center;" ></td>
+			<td id="c_1_6" style="text-align:center;" ></td>
+			<td id="c_1_7" style="text-align:center;" ></td>
+		</tr>		
+		<tr>
+			<td id="c_2_1" style="text-align:center;" ></td>
+			<td id="c_2_2" style="text-align:center;" ></td>
+			<td id="c_2_3" style="text-align:center;" ></td>
+			<td id="c_2_4" style="text-align:center;" ></td>
+			<td id="c_2_5" style="text-align:center;" ></td>
+			<td id="c_2_6" style="text-align:center;" ></td>
+			<td id="c_2_7" style="text-align:center;" ></td>
+		</tr>		
+		<tr>
+			<td id="c_3_1" style="text-align:center;" ></td>
+			<td id="c_3_2" style="text-align:center;" ></td>
+			<td id="c_3_3" style="text-align:center;" ></td>
+			<td id="c_3_4" style="text-align:center;" ></td>
+			<td id="c_3_5" style="text-align:center;" ></td>
+			<td id="c_3_6" style="text-align:center;" ></td>
+			<td id="c_3_7" style="text-align:center;" ></td>
+		</tr>		
+		<tr>
+			<td id="c_4_1" style="text-align:center;" ></td>
+			<td id="c_4_2" style="text-align:center;" ></td>
+			<td id="c_4_3" style="text-align:center;" ></td>
+			<td id="c_4_4" style="text-align:center;" ></td>
+			<td id="c_4_5" style="text-align:center;" ></td>
+			<td id="c_4_6" style="text-align:center;" ></td>
+			<td id="c_4_7" style="text-align:center;" ></td>
+		</tr>		
+		<tr>
+			<td id="c_5_1" style="text-align:center;" ></td>
+			<td id="c_5_2" style="text-align:center;" ></td>
+			<td id="c_5_3" style="text-align:center;" ></td>
+			<td id="c_5_4" style="text-align:center;" ></td>
+			<td id="c_5_5" style="text-align:center;" ></td>
+			<td id="c_5_6" style="text-align:center;" ></td>
+			<td id="c_5_7" style="text-align:center;" ></td>
+		</tr>		
+		<tr>
+			<td id="c_6_1" style="text-align:center;" ></td>
+			<td id="c_6_2" style="text-align:center;" ></td>
+			<td id="c_6_3" style="text-align:center;" ></td>
+			<td id="c_6_4" style="text-align:center;" ></td>
+			<td id="c_6_5" style="text-align:center;" ></td>
+			<td id="c_6_6" style="text-align:center;" ></td>
+			<td id="c_6_7" style="text-align:center;" ></td>
+		</tr>		
+	</table>	
+
+</div>
+
+</td>
+</tr>
+</table>
+<script language="JScript">
+	<!--
+	ajustarMesActual()
+	showMonth(form_calendar)
+	-->
+</script>
+</div>

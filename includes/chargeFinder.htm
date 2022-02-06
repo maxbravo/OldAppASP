@@ -1,0 +1,401 @@
+<script language="javascript" src="includes/charge_file_list.js"></script>
+<!-- El script líneas arriba debe configurar un objeto que devuelva los archivos en el siguiente formato:
+g_lista_archivos["area"]["año"]["mes"]["tipo de asignación"]
+-->
+
+<script>
+function verReporte(forma){
+	var l_archivo=""
+	try{
+		l_archivo = g_lista_archivos[forma.departamento.value][forma.anio.value][forma.mes.value][forma.concepto.value]
+		}
+	catch(ex){
+		}
+	if(l_archivo==null || l_archivo+""=="" || l_archivo+""=="undefined"){
+		if(lang=="EN"){
+			alert("Sorry, the requested Report has not been registered yet.")			
+			}
+		else{
+			alert("Lo sentimos, pero el reporte solicitado no se encuentra registrado todavía.")		
+			}
+		}
+	else{
+		openWindow(l_archivo)
+		}
+	}
+function seleccionarItem(mes,concepto){
+	form_buscador_asignaciones.mes.value=mes
+	form_buscador_asignaciones.concepto.value=concepto
+	verReporte(form_buscador_asignaciones)
+	}
+function validarMostrarTabla(){
+	if(form_buscador_asignaciones.departamento.value!=""){
+		div_tabla_anio.style.visibility="visible";
+		div_tabla_anio.style.display="block";
+		}
+	else{
+		div_tabla_anio.style.visibility="hidden";
+		div_tabla_anio.style.display="none";	
+		}
+	}
+</script>
+<form name="form_buscador_asignaciones">
+<div id="div_form_buscador_asignaciones">
+<table border="0" width="580"> <tr><td valign="top" width="412">
+		Departamento:
+		<select name="departamento" onChange="validarMostrarTabla()">
+			<option value="" SELECTED>Escoja el Departamento</option>		
+			<option value="Finance">Comercial - Finanzas</option>
+			<option value="IT">Comercial - IT</option>
+			<option value="JDE">Comercial - JDE</option>
+			<option value="General Management">Corporativo - Gerencia General</option>
+			<option value="Business Development">Corporativo - Business
+            Development</option>
+			<option value="Media & Communications">Coporativo - Medios de
+            Comunicación</option>
+			<option value="Legal Department">Corporativo - Departamento Legal</option>
+			<option value="EHS">EHS</option>	
+			<option value="Community Affairs">EHS - Asuntos Comunitarios</option>	
+			<option value="ÑanPaz Foundation">EHS - Fundación ÑanPaz</option>				
+			<option value="New Ventures">Geociencias - New Ventures</option>
+			<option value="Geoscience & Planning">Geociencias - Geociencias y
+            Planificación</option>			
+			<option value="Drilling">Operaciones - Perforaciones</option>
+			<option value="Facilities">Operaciones - Instalaciones</option>
+			<option value="Field Production">Operaciones - Producción en el
+            Campo</option>
+			<option value="DSE">Operaciones - DSE</option>
+			<option value="Security Field">Operaciones - Seguridad en el Campo</option>
+			<option value="Security Quito">Operaciones - Seguridad en Quito</option>			
+			<option value="Procurement">Operaciones - Procurement</option>
+			<option value="Operations Engineering">Operaciones - Ingeniería de
+            Operaciones</option>
+			<option value="LATF">Operaciones - LATF</option>
+			<option value="Power Plant">Operaciones - Planta de Poder</option>	
+			<option value="Human Resources">Recursos Humanos</option>	            			
+		</select>	
+</td><td valign="top" width="154">
+	Año:
+	<select name="anio" onChange="validarMostrarTabla()">
+	<option value="2003" SELECTED>2003</option>
+	<option value="2002">2002</option>
+	</select>
+</td></tr></table>
+<input type="hidden" name="mes">
+<input type="hidden" name="concepto">
+
+</div>
+
+</form>
+
+<div id="div_tabla_anio" style="visibility:hidden;display:none;">
+<table  borderColor="#808080" cellSpacing="3" borderColorDark="#808080" cellPadding="3" borderColorLight="#808080" border="2" width="697">
+  <tr>
+    <td class="banner_blue" width="90"><font size="1">Enero</font></td>
+    <td class="banner_blue" width="117"><font size="1">Febrero</font></td>
+    <td class="banner_blue" width="102"><font size="1">Marzo</font></td>
+    <td class="banner_blue" width="106"><font size="1">Abril</font></td>
+
+    <td class="banner_blue" width="102"><font size="1">Mayo</font></td>
+    <td class="banner_blue" width="100"><font size="1">Junio</font></td>    
+
+  </tr>
+  <tr>
+    <td width="90"><a href="javascript:seleccionarItem('Jan','Assigned Resources')"><font size="1">Recursos Asignados</font></a></td>
+    <td width="117"><a href="javascript:seleccionarItem('Feb','Assigned Resources')"><font size="1">Recursos Asignados</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Mar','Assigned Resources')"><font size="1">Recursos Asignados</font></a></td>
+    <td width="106"><a href="javascript:seleccionarItem('Apr','Assigned Resources')"><font size="1">Recursos Asignados</font></a></td>
+    
+    <td width="102"><a href="javascript:seleccionarItem('May','Assigned Resources')"><font size="1">Recursos Asignados</font></a></td>
+    <td width="100"><a href="javascript:seleccionarItem('Jun','Assigned Resources')"><font size="1">Recursos Asignados</font></a></td>
+    
+  </tr>
+  <tr>
+    <td width="90"><a href="javascript:seleccionarItem('Jan','Telephone Consumptions')"><font size="1">Consumo Teléfono</font></a></td>
+    <td width="117"><a href="javascript:seleccionarItem('Feb','Telephone Consumptions')"><font size="1">Consumo Teléfono</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Mar','Telephone Consumptions')"><font size="1">Consumo Teléfono</font></a></td>
+    <td width="106"><a href="javascript:seleccionarItem('Apr','Telephone Consumptions')"><font size="1">Consumo Teléfono</font></a></td>
+
+    <td width="102"><a href="javascript:seleccionarItem('May','Telephone Consumptions')"><font size="1">Consumo Teléfono</font></a></td>
+    <td width="100"><a href="javascript:seleccionarItem('Jun','Telephone Consumptions')"><font size="1">Consumo Teléfono</font></a></td>
+
+  </tr>
+  <tr>
+    <td width="90"><a href="javascript:seleccionarItem('Jan','Cellular Consumptions')"><font size="1">Consumo Celular</font></a></td>
+    <td width="117"><a href="javascript:seleccionarItem('Feb','Cellular Consumptions')"><font size="1">Consumo Celular</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Mar','Cellular Consumptions')"><font size="1">Consumo Celular</font></a></td>
+    <td width="106"><a href="javascript:seleccionarItem('Apr','Cellular Consumptions')"><font size="1">Consumo Celular</font></a></td>
+
+    <td width="102"><a href="javascript:seleccionarItem('May','Cellular Consumptions')"><font size="1">Consumo Celular</font></a></td>
+    <td width="100"><a href="javascript:seleccionarItem('Jun','Cellular Consumptions')"><font size="1">Consumo Celular</font></a></td>
+
+  </tr>
+  <tr>
+    <td width="90"><a href="javascript:seleccionarItem('Jan','Summary')"><font size="1">Resumen</font></a></td>
+    <td width="117"><a href="javascript:seleccionarItem('Feb','Summary')"><font size="1">Resumen</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Mar','Summary')"><font size="1">Resumen</font></a></td>
+    <td width="106"><a href="javascript:seleccionarItem('Apr','Summary')"><font size="1">Resumen</font></a></td>
+
+    <td width="102"><a href="javascript:seleccionarItem('May','Summary')"><font size="1">Resumen</font></a></td>
+    <td width="100"><a href="javascript:seleccionarItem('Jun','Summary')"><font size="1">Resumen</font></a></td>
+
+  </tr>
+  <tr>
+    <td width="90"><a href="javascript:seleccionarItem('Jan','Limits & Exceeds')"><font size="1">Límites y Excesos</font></a></td>
+    <td width="117"><a href="javascript:seleccionarItem('Feb','Limits & Exceeds')"><font size="1">Límites y Excesos</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Mar','Limits & Exceeds')"><font size="1">Límites y Excesos</font></a></td>
+    <td width="106"><a href="javascript:seleccionarItem('Apr','Limits & Exceeds')"><font size="1">Límites y Excesos</font></a></td>
+
+    <td width="102"><a href="javascript:seleccionarItem('Jul','Limits & Exceeds')"><font size="1">Límites y Excesos</font></a></td>
+    <td width="100"><a href="javascript:seleccionarItem('Aug','Limits & Exceeds')"><font size="1">Límites y Excesos</font></a></td>
+
+  </tr>
+  <tr>
+    <td class="banner_blue" width="90"><font size="1">Julio</font></td>
+    <td class="banner_blue" width="117"><font size="1">Agosto</font></td>
+    
+    <td class="banner_blue" width="102"><font size="1">Septiembre</font></td>
+    <td class="banner_blue" width="106"><font size="1">Octubre</font></td>
+    <td class="banner_blue" width="102"><font size="1">Noviembre</font></td>
+    <td class="banner_blue" width="100"><font size="1">Diciembre</font></td>
+    
+  </tr>
+  <tr>
+    <td width="90"><a href="javascript:seleccionarItem('Jul','Assigned Resources')"><font size="1">Recursos Asignados</font></a></td>
+    <td width="117"><a href="javascript:seleccionarItem('Aug','Assigned Resources')"><font size="1">Recursos Asignados</font></a></td>
+
+    <td width="102"><a href="javascript:seleccionarItem('Sep','Assigned Resources')"><font size="1">Recursos Asignados</font></a></td>
+    <td width="106"><a href="javascript:seleccionarItem('Oct','Assigned Resources')"><font size="1">Recursos Asignados</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Nov','Assigned Resources')"><font size="1">Recursos Asignados</font></a></td>
+    <td width="100"><a href="javascript:seleccionarItem('Dec','Assigned Resources')"><font size="1">Recursos Asignados</font></a></td>
+
+  </tr>
+  <tr>
+    <td width="90"><a href="javascript:seleccionarItem('Jul','Telephone Consumptions')"><font size="1">Consumo Teléfono</font></a></td>
+    <td width="117"><a href="javascript:seleccionarItem('Aug','Telephone Consumptions')"><font size="1">Consumo Teléfono</font></a></td>
+
+    <td width="102"><a href="javascript:seleccionarItem('Sep','Telephone Consumptions')"><font size="1">Consumo Teléfono</font></a></td>
+    <td width="106"><a href="javascript:seleccionarItem('Oct','Telephone Consumptions')"><font size="1">Consumo Teléfono</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Nov','Telephone Consumptions')"><font size="1">Consumo Teléfono</font></a></td>
+    <td width="100"><a href="javascript:seleccionarItem('Dec','Telephone Consumptions')"><font size="1">Consumo Teléfono</font></a></td>
+
+  </tr>
+  <tr>
+    <td width="90"><a href="javascript:seleccionarItem('Jul','Cellular Consumptions')"><font size="1">Consumo Celular</font></a></td>
+    <td width="117"><a href="javascript:seleccionarItem('Aug','Cellular Consumptions')"><font size="1">Consumo Celular</font></a></td>
+
+    <td width="102"><a href="javascript:seleccionarItem('Sep','Cellular Consumptions')"><font size="1">Consumo Celular</font></a></td>
+    <td width="106"><a href="javascript:seleccionarItem('Oct','Cellular Consumptions')"><font size="1">Consumo Celular</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Nov','Cellular Consumptions')"><font size="1">Consumo Celular</font></a></td>
+    <td width="100"><a href="javascript:seleccionarItem('Dec','Cellular Consumptions')"><font size="1">Consumo Celular</font></a></td>
+
+  </tr>
+  <tr>
+    <td width="90"><a href="javascript:seleccionarItem('Jul','Summary')"><font size="1">Resumen</font></a></td>
+    <td width="117"><a href="javascript:seleccionarItem('Aug','Summary')"><font size="1">Resumen</font></a></td>
+
+    <td width="102"><a href="javascript:seleccionarItem('Sep','Summary')"><font size="1">Resumen</font></a></td>
+    <td width="106"><a href="javascript:seleccionarItem('Oct','Summary')"><font size="1">Resumen</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Nov','Summary')"><font size="1">Resumen</font></a></td>
+    <td width="100"><a href="javascript:seleccionarItem('Dec','Summary')"><font size="1">Resumen</font></a></td>
+
+  </tr>
+  <tr>
+    <td width="90"><a href="javascript:seleccionarItem('May','Limits & Exceeds')"><font size="1">Límites y Excesos</font></a></td>
+    <td width="117"><a href="javascript:seleccionarItem('Jun','Limits & Exceeds')"><font size="1">Límites y Excesos</font></a></td>
+
+    <td width="102"><a href="javascript:seleccionarItem('Sep','Limits & Exceeds')"><font size="1">Límites y Excesos</font></a></td>
+    <td width="106"><a href="javascript:seleccionarItem('Oct','Limits & Exceeds')"><font size="1">Límites y Excesos</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Nov','Limits & Exceeds')"><font size="1">Límites y Excesos</font></a></td>
+    <td width="100"><a href="javascript:seleccionarItem('Dec','Limits & Exceeds')"><font size="1">Límites y Excesos</font></a></td>
+
+  </tr>
+</table>
+</div>
+
+<form style="visibility:hidden;display:none;" name="form_buscador_asignaciones_en">
+<div id="div_form_buscador_asignaciones_en">
+
+<table border="0" width="578"> <tr><td valign="top" width="376">
+		Departament:
+		<select name="departamento" onChange="validarMostrarTabla()">
+			<option value="" SELECTED>Choose a Department</option>		
+			<option value="Finance" SELECTED>Commercial - Finance</option>
+			<option value="IT">Commercial - IT</option>
+			<option value="JDE">Commercial - JDE</option>
+			<option value="General Management">Corporative - General Management</option>
+			<option value="Business Development">Corporative - Business
+            Development</option>
+			<option value="Media & Communications">Coporative - Media &amp;
+            Communication</option>
+			<option value="Legal Department">Corporative - Legal Department</option>			
+			<option value="EHS">EHS</option>	
+			<option value="Community Affairs">EHS - Community Affairs</option>	
+			<option value="ÑanPaz Foundation">EHS - ÑanPaz Foundation</option>				
+			<option value="New Ventures">Geoscience - New Ventures</option>
+			<option value="Geoscience & Planning">Geoscience - Geoscience &amp;
+            Planning</option>
+			<option value="Human Resources">Human Resources</option>				
+			<option value="Drilling">Operations - Drilling</option>
+			<option value="Facilities">Operations - Facilities</option>
+			<option value="Field Production">Operations - Field Production</option>
+			<option value="DSE">Operations - DSE</option>
+			<option value="Security Field">Operations - Security Field</option>
+			<option value="Security Quito">Operations - Security Quito</option>			
+			<option value="Procurement">Operations - Procurement</option>
+			<option value="Operations Engineering">Operations - Operations
+            Engineering</option>
+			<option value="LATF">Operations - LATF</option>
+			<option value="Power Plant">Operations - Power Plant</option>	
+			
+		</select>	
+</td><td valign="top" width="188">
+	Year:
+	<select name="anio" onChange="validarMostrarTabla()">
+	<option value="2003" SELECTED>2003</option>
+	<option value="2002">2002</option>
+	</select>
+</td></tr></table>
+<input type="hidden" name="mes">
+<input type="hidden" name="concepto">
+
+</div>
+</form>
+
+<div id="div_tabla_anio_en" style="visibility:hidden;display:none;">
+<table  borderColor="#808080" cellSpacing="3" borderColorDark="#808080" cellPadding="3" borderColorLight="#808080" border="2" width="699">
+  <tr>
+    <td class="banner_blue" width="89"><font size="1">January</font></td>
+    <td class="banner_blue" width="118"><font size="1">February</font></td>
+    <td class="banner_blue" width="102"><font size="1">March</font></td>
+    <td class="banner_blue" width="104"><font size="1">April</font></td>
+    
+    <td class="banner_blue" width="102"><font size="1">May</font></td>
+    <td class="banner_blue" width="104"><font size="1">June</font></td>
+    
+  </tr>
+  <tr>
+    <td width="89"><a href="javascript:seleccionarItem('Jan','Assigned Resources')"><font size="1">Assigned Resources</font></a></td>
+    <td width="118"><a href="javascript:seleccionarItem('Feb','Assigned Resources')"><font size="1">Assigned Resources</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Mar','Assigned Resources')"><font size="1">Assigned Resources</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Apr','Assigned Resources')"><font size="1">Assigned Resources</font></a></td>
+    
+    <td width="102"><a href="javascript:seleccionarItem('May','Assigned Resources')"><font size="1">Assigned Resources</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Jun','Assigned Resources')"><font size="1">Assigned Resources</font></a></td>
+    
+  </tr>
+  <tr>
+    <td width="89"><a href="javascript:seleccionarItem('Jan','Telephone Consumptions')"><font size="1">Telephone Consumptions</font></a></td>
+    <td width="118"><a href="javascript:seleccionarItem('Feb','Telephone Consumptions')"><font size="1">Telephone Consumptions</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Mar','Telephone Consumptions')"><font size="1">Telephone Consumptions</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Apr','Telephone Consumptions')"><font size="1">Telephone Consumptions</font></a></td>
+
+    <td width="102"><a href="javascript:seleccionarItem('May','Telephone Consumptions')"><font size="1">Telephone Consumptions</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Jun','Telephone Consumptions')"><font size="1">Telephone Consumptions</font></a></td>
+
+  </tr>
+  <tr>
+    <td width="89"><a href="javascript:seleccionarItem('Jan','Cellular Consumptions')"><font size="1">Cellular Consumptions</font></a></td>
+    <td width="118"><a href="javascript:seleccionarItem('Feb','Cellular Consumptions')"><font size="1">Cellular Consumptions</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Mar','Cellular Consumptions')"><font size="1">Cellular Consumptions</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Apr','Cellular Consumptions')"><font size="1">Cellular Consumptions</font></a></td>
+
+    <td width="102"><a href="javascript:seleccionarItem('May','Cellular Consumptions')"><font size="1">Cellular Consumptions</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Jun','Cellular Consumptions')"><font size="1">Cellular Consumptions</font></a></td>
+
+  </tr>
+  <tr>
+    <td width="89"><a href="javascript:seleccionarItem('Jan','Summary')"><font size="1">Summary</font></a></td>
+    <td width="118"><a href="javascript:seleccionarItem('Feb','Summary')"><font size="1">Summary</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Mar','Summary')"><font size="1">Summary</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Apr','Summary')"><font size="1">Summary</font></a></td>
+
+    <td width="102"><a href="javascript:seleccionarItem('May','Summary')"><font size="1">Summary</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Jun','Summary')"><font size="1">Summary</font></a></td>
+
+  </tr>
+  <tr>
+    <td width="89"><a href="javascript:seleccionarItem('Jan','Limits & Exceeds')"><font size="1">Limits & Exceeds</font></a></td>
+    <td width="118"><a href="javascript:seleccionarItem('Feb','Limits & Exceeds')"><font size="1">Limits & Exceeds</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Mar','Limits & Exceeds')"><font size="1">Limits & Exceeds</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Apr','Limits & Exceeds')"><font size="1">Limits & Exceeds</font></a></td>
+
+    <td width="102"><a href="javascript:seleccionarItem('May','Limits & Exceeds')"><font size="1">Limits & Exceeds</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Jun','Limits & Exceeds')"><font size="1">Limits & Exceeds</font></a></td>
+
+  </tr>
+  <tr>
+    <td class="banner_blue" width="89"><font size="1">July</font></td>
+    <td class="banner_blue" width="118"><font size="1">August</font></td>
+
+    <td class="banner_blue" width="102"><font size="1">September</font></td>
+    <td class="banner_blue" width="104"><font size="1">October</font></td>
+    <td class="banner_blue" width="102"><font size="1">November</font></td>
+    <td class="banner_blue" width="104"><font size="1">December</font></td>
+
+  </tr>
+  <tr>
+    <td width="89"><a href="javascript:seleccionarItem('Jul','Assigned Resources')"><font size="1">Assigned Resources</font></a></td>
+    <td width="118"><a href="javascript:seleccionarItem('Aug','Assigned Resources')"><font size="1">Assigned Resources</font></a></td>
+
+    <td width="102"><a href="javascript:seleccionarItem('Sep','Assigned Resources')"><font size="1">Assigned Resources</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Oct','Assigned Resources')"><font size="1">Assigned Resources</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Nov','Assigned Resources')"><font size="1">Assigned Resources</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Dec','Assigned Resources')"><font size="1">Assigned Resources</font></a></td>
+
+  </tr>
+  <tr>
+    <td width="89"><a href="javascript:seleccionarItem('Jul','Telephone Consumptions')"><font size="1">Telephone Consumptions</font></a></td>
+    <td width="118"><a href="javascript:seleccionarItem('Aug','Telephone Consumptions')"><font size="1">Telephone Consumptions</font></a></td>
+
+    <td width="102"><a href="javascript:seleccionarItem('Sep','Telephone Consumptions')"><font size="1">Telephone Consumptions</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Oct','Telephone Consumptions')"><font size="1">Telephone Consumptions</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Nov','Telephone Consumptions')"><font size="1">Telephone Consumptions</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Dec','Telephone Consumptions')"><font size="1">Telephone Consumptions</font></a></td>
+
+  </tr>
+  <tr>
+    <td width="89"><a href="javascript:seleccionarItem('Jul','Cellular Consumptions')"><font size="1">Cellular Consumptions</font></a></td>
+    <td width="118"><a href="javascript:seleccionarItem('Aug','Cellular Consumptions')"><font size="1">Cellular Consumptions</font></a></td>
+
+    <td width="102"><a href="javascript:seleccionarItem('Sep','Cellular Consumptions')"><font size="1">Cellular Consumptions</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Oct','Cellular Consumptions')"><font size="1">Cellular Consumptions</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Nov','Cellular Consumptions')"><font size="1">Cellular Consumptions</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Dec','Cellular Consumptions')"><font size="1">Cellular Consumptions</font></a></td>
+
+  </tr>
+  <tr>
+    <td width="89"><a href="javascript:seleccionarItem('Jul','Summary')"><font size="1">Summary</font></a></td>
+    <td width="118"><a href="javascript:seleccionarItem('Aug','Summary')"><font size="1">Summary</font></a></td>
+
+    <td width="102"><a href="javascript:seleccionarItem('Sep','Summary')"><font size="1">Summary</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Oct','Summary')"><font size="1">Summary</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Nov','Summary')"><font size="1">Summary</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Dec','Summary')"><font size="1">Summary</font></a></td>
+
+  </tr>
+  <tr>
+    <td width="89"><a href="javascript:seleccionarItem('Jul','Limits & Exceeds')"><font size="1">Limits & Exceeds</font></a></td>
+    <td width="118"><a href="javascript:seleccionarItem('Aug','Limits & Exceeds')"><font size="1">Limits & Exceeds</font></a></td>
+
+    <td width="102"><a href="javascript:seleccionarItem('Sep','Limits & Exceeds')"><font size="1">Limits & Exceeds</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Oct','Limits & Exceeds')"><font size="1">Limits & Exceeds</font></a></td>
+    <td width="102"><a href="javascript:seleccionarItem('Nov','Limits & Exceeds')"><font size="1">Limits & Exceeds</font></a></td>
+    <td width="104"><a href="javascript:seleccionarItem('Dec','Limits & Exceeds')"><font size="1">Limits & Exceeds</font></a></td>
+
+  </tr>
+</table>
+</div>
+
+
+
+<script>
+try{
+	if(lang=="EN"){
+		div_form_buscador_asignaciones.innerHTML=div_form_buscador_asignaciones_en.innerHTML
+		div_tabla_anio.innerHTML=div_tabla_anio_en.innerHTML
+		}
+	}
+catch(ex){
+	}
+</script>

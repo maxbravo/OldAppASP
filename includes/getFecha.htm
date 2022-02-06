@@ -1,0 +1,213 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us"/>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0"/>
+<meta name="ProgId" content="FrontPage.Editor.Document"/>
+<title>Choose a Date</title>
+<SCRIPT LANGUAGE="JavaScript">
+var g_fecha= new Date()
+var g_base= new Date()
+g_base.setDate(1)
+returnValue=""
+function mesAnterior(){
+	g_base.setMonth(g_base.getMonth()-1)
+	fillMonthFrom(g_base)
+	}
+function mesSiguiente(){
+	g_base.setMonth(g_base.getMonth()+1)
+	fillMonthFrom(g_base)	
+	}
+
+var l_lista_nombres_en=new Array()
+	
+	l_lista_nombres_en[0]="Jan"
+	l_lista_nombres_en[1]="Feb"
+	l_lista_nombres_en[2]="Mar"
+	l_lista_nombres_en[3]="Apr"
+	l_lista_nombres_en[4]="May"
+	l_lista_nombres_en[5]="Jun"
+	l_lista_nombres_en[6]="Jul"
+	l_lista_nombres_en[7]="Aug"
+	l_lista_nombres_en[8]="Sep"
+	l_lista_nombres_en[9]="Oct"
+	l_lista_nombres_en[10]="Nov"
+	l_lista_nombres_en[11]="Dec"
+	
+</SCRIPT>
+<link rel="stylesheet" type="text/css" href="http://ecuador.encana.com/includes/css/default.css"/>
+</head>
+
+<body>
+
+<div id="ctl_calendar" name="ctl_calendar">
+
+<SCRIPT>
+	<!--
+		
+	function fromYYYYMMDD(cadena){
+		
+		var l_anio=parseInt(cadena.substr(0,4))
+		var l_mes=parseInt(cadena.substr(4,2))-1
+		var l_dia=parseInt(cadena.substr(6,2))
+		
+		if(cadena.substr(4,2)=="08"){
+			l_mes=7
+			}
+		if(cadena.substr(4,2)=="09"){
+			l_mes=8
+			}
+		var l_retorno=new Date(l_anio,l_mes,l_dia)
+				
+		return l_retorno;
+		}
+	function toYYYYMMDD(fecha){
+		var l_anio=fecha.getFullYear() + ""
+		var l_mes=(fecha.getMonth()+1)+""
+		var l_dia=fecha.getDate() + ""
+		while (l_anio.length<4){
+			l_anio="0"+l_anio
+			}
+		while (l_mes.length<2){
+			l_mes="0"+l_mes
+			}
+		while (l_dia.length<2){
+			l_dia="0"+l_dia
+			}
+		var l_retorno=l_anio+l_mes+l_dia
+		return l_retorno;		
+		}
+
+	function fillMonthFrom(fecha){
+		
+		var l_fila=1
+		var l_fecha=new Date( fecha.getFullYear() , fecha.getMonth() , fecha.getDate() )		
+		var l_mes_actual=fecha.getMonth()
+		var l_columna=fecha.getDay();
+		
+		nombre_mes.innerText=l_lista_nombres_en[l_mes_actual] + " / " + l_fecha.getFullYear()
+		
+	 	if(l_columna==0){
+			l_columna=7
+			}
+		var l_index=0;
+		var l_celda;
+		
+		for(l_index=1;l_index<l_columna;l_index++){
+			l_celda=eval("c_1_"+l_index)
+			l_celda.innerHTML=""
+			}		
+		while(l_fecha.getMonth()==l_mes_actual){
+			
+			l_celda=eval("c_"+l_fila+"_"+l_columna)
+			l_celda.innerHTML="<a  href='xxx' onclick='dateSelectHandler(\""+toYYYYMMDD(l_fecha)+"\");window.close();return false'>"+l_fecha.getDate()+"</a>"
+			l_columna++;
+			if(l_columna>7){
+				l_columna=1;
+				l_fila++;
+				}
+			l_fecha.setDate(l_fecha.getDate()+1)
+			}
+		while(l_fila<=6){
+			l_celda=eval("c_"+l_fila+"_"+l_columna)
+			l_celda.innerHTML=""
+			l_columna++;
+			if(l_columna>7){
+				l_columna=1;
+				l_fila++;
+				}
+			}				
+		}
+function dateSelectHandler(cadena_fecha){	
+		l_retorno=fromYYYYMMDD(cadena_fecha)
+		returnValue=l_retorno+""
+		}
+
+
+	-->
+</SCRIPT>
+
+<div id="month1">
+	<table borderColor="#808080" cellSpacing="3" borderColorDark="#808080" cellPadding="3" borderColorLight="#808080" border="2">
+		<tr>
+		<td align="center" class="banner_blue" style="cursor:hand;font-weight:normal;" onmouseover="this.style.fontWeight='bolder'" onmouseout="this.style.fontWeight='normal'" onclick="mesAnterior()" >&lt;&lt;</td>
+		<td width="100%" align="center" class="banner_blue" id="nombre_mes" >&nbsp;</td>
+		<td align="center" class="banner_blue" style="cursor:hand;font-weight:normal;" onmouseover="this.style.fontWeight='bolder'" onmouseout="this.style.fontWeight='normal'" onclick="mesSiguiente()">&gt;&gt;</td>
+		</tr>
+	</table>
+	<table borderColor="#808080" cellSpacing="3" borderColorDark="#808080" cellPadding="3" borderColorLight="#808080" border="2">
+		<tr>
+			<td id="c_1" class="banner_blue">Mon</td>
+			<td id="c_2" class="banner_blue">Tue</td>
+			<td id="c_3" class="banner_blue">Wed</td>
+			<td id="c_4" class="banner_blue">Thu</td>
+			<td id="c_5" class="banner_blue">Fri</td>
+			<td id="c_6" class="banner_blue">Sat</td>
+			<td id="c_7" class="banner_blue">Sun</td>
+		</tr>
+		<tr>
+			<td id="c_1_1" style="text-align:center;" ></td>
+			<td id="c_1_2" style="text-align:center;" ></td>
+			<td id="c_1_3" style="text-align:center;" ></td>
+			<td id="c_1_4" style="text-align:center;" ></td>
+			<td id="c_1_5" style="text-align:center;" ></td>
+			<td id="c_1_6" style="text-align:center;" ></td>
+			<td id="c_1_7" style="text-align:center;" ></td>
+		</tr>		
+		<tr>
+			<td id="c_2_1" style="text-align:center;" ></td>
+			<td id="c_2_2" style="text-align:center;" ></td>
+			<td id="c_2_3" style="text-align:center;" ></td>
+			<td id="c_2_4" style="text-align:center;" ></td>
+			<td id="c_2_5" style="text-align:center;" ></td>
+			<td id="c_2_6" style="text-align:center;" ></td>
+			<td id="c_2_7" style="text-align:center;" ></td>
+		</tr>		
+		<tr>
+			<td id="c_3_1" style="text-align:center;" ></td>
+			<td id="c_3_2" style="text-align:center;" ></td>
+			<td id="c_3_3" style="text-align:center;" ></td>
+			<td id="c_3_4" style="text-align:center;" ></td>
+			<td id="c_3_5" style="text-align:center;" ></td>
+			<td id="c_3_6" style="text-align:center;" ></td>
+			<td id="c_3_7" style="text-align:center;" ></td>
+		</tr>		
+		<tr>
+			<td id="c_4_1" style="text-align:center;" ></td>
+			<td id="c_4_2" style="text-align:center;" ></td>
+			<td id="c_4_3" style="text-align:center;" ></td>
+			<td id="c_4_4" style="text-align:center;" ></td>
+			<td id="c_4_5" style="text-align:center;" ></td>
+			<td id="c_4_6" style="text-align:center;" ></td>
+			<td id="c_4_7" style="text-align:center;" ></td>
+		</tr>		
+		<tr>
+			<td id="c_5_1" style="text-align:center;" ></td>
+			<td id="c_5_2" style="text-align:center;" ></td>
+			<td id="c_5_3" style="text-align:center;" ></td>
+			<td id="c_5_4" style="text-align:center;" ></td>
+			<td id="c_5_5" style="text-align:center;" ></td>
+			<td id="c_5_6" style="text-align:center;" ></td>
+			<td id="c_5_7" style="text-align:center;" ></td>
+		</tr>		
+		<tr>
+			<td id="c_6_1" style="text-align:center;" ></td>
+			<td id="c_6_2" style="text-align:center;" ></td>
+			<td id="c_6_3" style="text-align:center;" ></td>
+			<td id="c_6_4" style="text-align:center;" ></td>
+			<td id="c_6_5" style="text-align:center;" ></td>
+			<td id="c_6_6" style="text-align:center;" ></td>
+			<td id="c_6_7" style="text-align:center;" ></td>
+		</tr>		
+	</table>	
+
+</div>
+
+
+<script language="JScript">
+	fillMonthFrom(g_base)
+</script>
+</div>
+</body>
+</html>
